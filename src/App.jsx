@@ -41,7 +41,7 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route
                   exact
-                  path="/admin"
+                  path="/admin/:date?"
                   element={<AdminPage />}
                 />
                 <Route

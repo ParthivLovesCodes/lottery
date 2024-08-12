@@ -20,6 +20,15 @@
   animation: spin 1s linear infinite;
 }
 
+@media screen and (max-width: 768px) {
+  .loading-spinner {
+    border-width: 5px;
+    border-left-width: 5px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

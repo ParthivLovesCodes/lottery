@@ -10,9 +10,6 @@ export const DataTable = ({ results }) => {
         <span>Sangam</span>
         <span>Chetak</span>
         <span>Super</span>
-        <span>Mp Deluxe</span>
-        <span>Bhagya Rekha</span>
-        <span>Diamond</span>
       </div>
       {results?.map((item) => {
         if (item["declared"])

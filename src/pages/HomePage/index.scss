@@ -32,7 +32,8 @@
   gap: 15px;
   padding: 40px 0;
   border-bottom: 2px solid #808080;
-  p {
+  p,
+  h1 {
     margin: 0;
   }
   .main-heading {
@@ -78,12 +79,13 @@
   .top-panel {
     padding: 20px 0;
     border-width: 1px;
+    gap: 10px;
     .main-heading {
       font-size: 18px;
       text-shadow: none;
       font-weight: 900;
       text-shadow: 0.5px 0.5px;
-      margin-bottom: 10px;
+      margin-bottom: 0px;
     }
     .sub-heading {
       font-size: 12px;

@@ -7,6 +7,7 @@ import moment from "moment";
 import dayjs from "dayjs";
 import { DataContext } from "../../context/DataContext";
 import { toast } from "react-toastify";
+import { useLoading } from "../../context/LoadingContext";
 
 const getTodayDate = () => {
   return moment().format("DD-MM-YYYY");
@@ -15,11 +16,13 @@ const getTodayDate = () => {
 const HomePage = () => {
   const [date, setDate] = useState(getTodayDate());
   const { getResultsByDate } = useContext(DataContext);
+  const { showLoading, hideLoading } = useLoading();
   const [results, setResults] = useState(null);
 
   useEffect(() => {
     const fetchResults = async () => {
       try {
+        showLoading();
         const data = await getResultsByDate(date);
         if (data?.data) {
           setResults(data?.data);
@@ -30,6 +33,8 @@ const HomePage = () => {
         }
       } catch (error) {
         console.error("Error fetching results: ", error);
+      } finally {
+        hideLoading();
       }
     };
     fetchResults();
@@ -41,6 +46,7 @@ const HomePage = () => {
 
   const submitSearch = async () => {
     try {
+      showLoading();
       const data = await getResultsByDate(date);
       if (data?.data) {
         setResults(data?.data);
@@ -51,13 +57,15 @@ const HomePage = () => {
       }
     } catch (error) {
       console.error("Error fetching results: ", error);
+    } finally {
+      hideLoading();
     }
   };
   return (
     <div className="home-page">
       <div className="box-container">
         <div className="top-panel">
-          <p className="main-heading">Play India Lottery</p>
+          <h1 className="main-heading">Play India Deluxe Lottery</h1>
           <p className="sub-heading">Daily Result Chart</p>
           <p className="info">
             CONTACT FOR RESULT SMS & CUSTOMER CARE: 9555999608

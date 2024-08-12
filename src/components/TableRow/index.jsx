@@ -8,9 +8,6 @@ export const TableRow = ({ data }) => {
       <span>{data["1_"]}</span>
       <span>{data["2_"]}</span>
       <span>{data["3_"]}</span>
-      <span>{data["4_"]}</span>
-      <span>{data["5_"]}</span>
-      <span>{data["6_"]}</span>
     </div>
   );
 };

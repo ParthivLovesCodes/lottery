@@ -10,9 +10,6 @@ export const TableRowAdmin = ({ data, date }) => {
       <span>{data["1_"]}</span>
       <span>{data["2_"]}</span>
       <span>{data["3_"]}</span>
-      <span>{data["4_"]}</span>
-      <span>{data["5_"]}</span>
-      <span>{data["6_"]}</span>
       <span className={data["declared"] ? "green" : "red"}>
         {data["declared"] ? "✅" : "-"}
       </span>

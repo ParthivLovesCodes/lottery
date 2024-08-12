@@ -5,7 +5,7 @@
   .table-header {
     width: 100%;
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr 2fr 3fr 3fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr;
     justify-content: space-between;
     width: fit-content;
     color: #0000ff;
@@ -20,14 +20,14 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-size: 16px;
+      font-size: 18px;
       text-transform: uppercase;
       &:last-child {
         border: none;
       }
     }
     span.draw-time {
-      font-size: 18px;
+      font-size: 22px;
       text-transform: none;
     }
   }
@@ -35,7 +35,7 @@
 
 @media screen and (max-width: 768px) {
   .table .table-header {
-    grid-template-columns: 2fr 2fr 2fr 2fr 2fr 3fr 3fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr;
     span {
       font-size: 8px;
     }

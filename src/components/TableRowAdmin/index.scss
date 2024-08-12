@@ -1,7 +1,7 @@
 .table-body {
   width: 100%;
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 3fr 3fr 2fr 2fr;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr;
   justify-content: space-between;
   width: fit-content;
   color: #000;
@@ -39,7 +39,7 @@
 
 @media screen and (max-width: 768px) {
   .table-body {
-    grid-template-columns: 2fr 2fr 2fr 2fr 2fr 3fr 3fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr;
     span,
     span.blue-link-text {
       font-size: 8px;

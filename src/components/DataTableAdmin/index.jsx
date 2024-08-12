@@ -10,9 +10,6 @@ export const DataTableAdmin = ({ dataArr, date }) => {
         <span>Sangam</span>
         <span>Chetak</span>
         <span>Super</span>
-        <span>Mp Deluxe</span>
-        <span>Bhagya Rekha</span>
-        <span>Diamond</span>
         <span>Status</span>
         <span>Action</span>
       </div>
@@ -26,5 +23,3 @@ export const DataTableAdmin = ({ dataArr, date }) => {
     </div>
   );
 };
-
-export default DataTableAdmin;

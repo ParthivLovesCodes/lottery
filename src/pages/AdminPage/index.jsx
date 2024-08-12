@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
 import "./index.scss";
 import { DatePicker } from "antd";
 import moment from "moment";
@@ -8,19 +7,20 @@ import dayjs from "dayjs";
 import { useData } from "../../context/DataContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DataTableAdmin from "../../components/DataTableAdmin";
 import { useLoading } from "../../context/LoadingContext";
+import { useParams } from "react-router-dom";
+import { AdminNavbar, DataTableAdmin } from "../../components";
 
 const getTodayDate = () => {
   return moment().format("DD-MM-YYYY");
 };
 
 const AdminPage = () => {
-  const { signOutUser } = useAuth();
+  const { date: dateId } = useParams();
   const { getResultsByDate, createDayDoc } = useData();
   const { showLoading, hideLoading } = useLoading();
 
-  const [date, setDate] = useState(getTodayDate());
+  const [date, setDate] = useState(dateId ?? getTodayDate());
   const [results, setResults] = useState([]);
   const [newNeeded, setNewNeeded] = useState(false);
 
@@ -43,12 +43,16 @@ const AdminPage = () => {
       }
     };
     fetchResults();
-  }, [newNeeded]);
+  }, [newNeeded, dateId]);
 
   const createDay = async () => {
     try {
       showLoading();
-      await createDayDoc(date);
+      const res = await createDayDoc(date);
+      if (!res?.success) {
+        toast.error(res.message);
+        return;
+      }
       setNewNeeded(false);
       toast.success("Data Created Successfully!");
     } catch (error) {
@@ -94,17 +98,7 @@ const AdminPage = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="top">
-        <div className="top-content">
-          <span className="admin-title">Admin Dashboard</span>
-          <button
-            className="logout-btn"
-            onClick={signOutUser}
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+      <AdminNavbar />
       <div className="body-container">
         <div className="data-card">
           <div className="body-top-1">

@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
   query,
   Timestamp,
   updateDoc,
@@ -19,6 +20,19 @@ export const useData = () => useContext(DataContext);
 export const DataProvider = ({ children }) => {
   const createDayDoc = async (dayId) => {
     try {
+      const timesCollectionRef = collection(
+        firestore,
+        "results",
+        dayId,
+        "times"
+      );
+      const q = query(timesCollectionRef, limit(1));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        console.log("Document already exists, skipping creation.");
+        return { success: false, message: "Data Already Created!" };
+      }
       const startHour = 9;
       const endHour = 21;
       const intervalMinutes = 15;
@@ -39,24 +53,17 @@ export const DataProvider = ({ children }) => {
             "1_": "00",
             "2_": "00",
             "3_": "00",
-            "4_": "00",
-            "5_": "00",
-            "6_": "00",
             createdAt: Timestamp.now(),
           };
 
-          const timesCollectionRef = collection(
-            firestore,
-            "results",
-            dayId,
-            "times"
-          );
           await addDoc(timesCollectionRef, timeData);
         }
       }
       console.log("All time slots successfully created!");
+      return { success: true, message: "Success" };
     } catch (error) {
       console.error("Error creating subdocuments: ", error);
+      return { success: false, message: "Error Creating Data!" };
     }
   };
 
