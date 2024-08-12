@@ -1,0 +1,150 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import "./index.scss";
+import { DatePicker } from "antd";
+import moment from "moment";
+import dayjs from "dayjs";
+import { useData } from "../../context/DataContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import DataTableAdmin from "../../components/DataTableAdmin";
+import { useLoading } from "../../context/LoadingContext";
+
+const getTodayDate = () => {
+  return moment().format("DD-MM-YYYY");
+};
+
+const AdminPage = () => {
+  const { signOutUser } = useAuth();
+  const { getResultsByDate, createDayDoc } = useData();
+  const { showLoading, hideLoading } = useLoading();
+
+  const [date, setDate] = useState(getTodayDate());
+  const [results, setResults] = useState([]);
+  const [newNeeded, setNewNeeded] = useState(false);
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      try {
+        showLoading();
+        const data = await getResultsByDate(date);
+        if (data?.data) {
+          setResults(data?.data);
+        } else if (data?.error === "Not Found!") {
+          setNewNeeded(true);
+        } else {
+          toast.error("Something Went Wrong!");
+        }
+      } catch (error) {
+        console.error("Error fetching results: ", error);
+      } finally {
+        hideLoading();
+      }
+    };
+    fetchResults();
+  }, [newNeeded]);
+
+  const createDay = async () => {
+    try {
+      showLoading();
+      await createDayDoc(date);
+      setNewNeeded(false);
+      toast.success("Data Created Successfully!");
+    } catch (error) {
+      toast.error("Unable to create data!");
+    } finally {
+      hideLoading();
+    }
+  };
+
+  const handleDateChange = (_, dateString) => {
+    setDate(() => dateString);
+  };
+
+  const submitSearch = async () => {
+    try {
+      showLoading();
+      const data = await getResultsByDate(date);
+      if (data?.data) {
+        setResults(data?.data);
+        setNewNeeded(false);
+      } else if (data?.error === "Not Found!") {
+        setNewNeeded(true);
+      } else {
+        toast.error("Something Went Wrong!");
+      }
+    } catch (error) {
+      toast.error("Unable to fetch data!");
+    } finally {
+      hideLoading();
+    }
+  };
+
+  return (
+    <div className="admin-page">
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <div className="top">
+        <div className="top-content">
+          <span className="admin-title">Admin Dashboard</span>
+          <button
+            className="logout-btn"
+            onClick={signOutUser}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+      <div className="body-container">
+        <div className="data-card">
+          <div className="body-top-1">
+            <DatePicker
+              className="date-input"
+              onChange={handleDateChange}
+              format={"DD-MM-YYYY"}
+              defaultValue={dayjs(date, "DD-MM-YYYY")}
+              size="small"
+            />
+            <button
+              type="button"
+              className="search-btn"
+              onClick={submitSearch}
+            >
+              Search
+            </button>
+          </div>
+          <div className="body-main">
+            {newNeeded ? (
+              <div className="create-day">
+                <span>No Data Found!</span>
+                <button
+                  className="create-btn"
+                  onClick={createDay}
+                >
+                  Create Data
+                </button>
+              </div>
+            ) : (
+              <DataTableAdmin
+                dataArr={results}
+                date={date}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminPage;

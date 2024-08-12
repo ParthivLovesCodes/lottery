@@ -1,0 +1,111 @@
+.home-page {
+  height: 100%;
+  width: auto;
+  .box-container {
+    background-color: #f7f3f3;
+    width: 100%;
+    margin: 20px auto;
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid #808080;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-page {
+    .box-container {
+      border-width: 1px;
+      max-width: 90%;
+    }
+  }
+}
+
+.top-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 40px 0;
+  border-bottom: 2px solid #808080;
+  p {
+    margin: 0;
+  }
+  .main-heading {
+    font-size: 40px;
+    font-weight: 700;
+    text-shadow: 2px 2px 2px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .sub-heading {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .info {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    .date-input {
+      height: 24px;
+      margin-left: 5px;
+      font-size: 14px;
+      color: #ed0808;
+      border-radius: 4px;
+      border-color: #a9a49d;
+    }
+    .search-btn {
+      height: 24px;
+      margin-left: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .top-panel {
+    padding: 20px 0;
+    border-width: 1px;
+    .main-heading {
+      font-size: 18px;
+      text-shadow: none;
+      font-weight: 900;
+      text-shadow: 0.5px 0.5px;
+      margin-bottom: 10px;
+    }
+    .sub-heading {
+      font-size: 12px;
+    }
+    .info {
+      font-size: 14px;
+    }
+    label {
+      font-size: 10px;
+      .date-input {
+        height: 18px;
+        font-size: 12px;
+      }
+      .search-btn {
+        margin-left: 20px;
+        height: 18px;
+        font-size: 8px;
+      }
+    }
+  }
+}
+
+.ant-calendar-picker-input.ant-input {
+  font-size: 8px;
+}
