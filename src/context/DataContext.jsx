@@ -145,6 +145,36 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const updateSettingsById = async (settingsId, updateData) => {
+    try {
+      const docRef = doc(firestore, "masterSettings", settingsId);
+      await updateDoc(docRef, updateData);
+      return { success: true };
+    } catch (error) {
+      console.error("Error updating document: ", error);
+      return { error: "Error updating document: " + error.message };
+    }
+  };
+
+  const getSettingsById = async (settingsId) => {
+    try {
+      const docRef = doc(firestore, "masterSettings", settingsId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        return { success: true, data: docSnap.data() };
+      } else {
+        return { success: false, error: "No such document exists!" };
+      }
+    } catch (error) {
+      console.error("Error retrieving document: ", error);
+      return {
+        success: false,
+        error: "Error retrieving document: " + error.message,
+      };
+    }
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -152,6 +182,8 @@ export const DataProvider = ({ children }) => {
         getResultByDateTime,
         createDayDoc,
         updateResultByDateTime,
+        getSettingsById,
+        updateSettingsById,
       }}
     >
       {children}

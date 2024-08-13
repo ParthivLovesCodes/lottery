@@ -111,3 +111,16 @@
 .ant-calendar-picker-input.ant-input {
   font-size: 8px;
 }
+
+.ant-picker-dropdown {
+  @media (max-width: 768px) {
+    inset: 170px auto auto 20% !important;
+  }
+}
+.ant-picker-dropdown .ant-picker-panel-container {
+  @media (max-width: 768px) {
+    max-width: 100vw !important;
+    overflow: auto !important;
+    inset: 170px auto auto 20% !important;
+  }
+}

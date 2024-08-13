@@ -14,8 +14,9 @@ const getTodayDate = () => {
 };
 
 const HomePage = () => {
+  const [phNumber, setPhNumber] = useState("XXXXXXXXXX");
   const [date, setDate] = useState(getTodayDate());
-  const { getResultsByDate } = useContext(DataContext);
+  const { getResultsByDate, getSettingsById } = useContext(DataContext);
   const { showLoading, hideLoading } = useLoading();
   const [results, setResults] = useState(null);
 
@@ -24,6 +25,8 @@ const HomePage = () => {
       try {
         showLoading();
         const data = await getResultsByDate(date);
+        const settings = await getSettingsById("masterSettings");
+        setPhNumber(settings?.data?.phoneNumber);
         if (data?.data) {
           setResults(data?.data);
         } else if (data?.error === "Not Found!") {
@@ -32,7 +35,7 @@ const HomePage = () => {
           toast.error("Something Went Wrong!");
         }
       } catch (error) {
-        console.error("Error fetching results: ", error);
+        console.error("Error fetching Data: ", error);
       } finally {
         hideLoading();
       }
@@ -68,7 +71,7 @@ const HomePage = () => {
           <h1 className="main-heading">Play India Deluxe Lottery</h1>
           <p className="sub-heading">Daily Result Chart</p>
           <p className="info">
-            CONTACT FOR RESULT SMS & CUSTOMER CARE: 9555999608
+            CONTACT FOR RESULT SMS & CUSTOMER CARE: {phNumber}
           </p>
           <label>
             Select Date

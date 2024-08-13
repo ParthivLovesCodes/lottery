@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   AdminEditRow,
   AdminPage,
+  AdminSettings,
   ForgotPassword,
   HomePage,
   LoginPage,
@@ -39,6 +40,11 @@ function App() {
                 element={<ForgotPassword />}
               />
               <Route element={<PrivateRoute />}>
+                <Route
+                  exact
+                  path="/admin/settings"
+                  element={<AdminSettings />}
+                />
                 <Route
                   exact
                   path="/admin/:date?"
