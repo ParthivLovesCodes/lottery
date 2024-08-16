@@ -6,8 +6,8 @@ import {
   doc,
   getDoc,
   getDocs,
-  limit,
   query,
+  setDoc,
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -26,13 +26,14 @@ export const DataProvider = ({ children }) => {
         dayId,
         "times"
       );
-      const q = query(timesCollectionRef, limit(1));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
+      const resultsDocRef = doc(firestore, "results", dayId);
+      const resultsDocSnapshot = await getDoc(resultsDocRef);
+      if (resultsDocSnapshot.exists()) {
         console.log("Document already exists, skipping creation.");
         return { success: false, message: "Data Already Created!" };
       }
+      await setDoc(resultsDocRef, { createdAt: Timestamp.now() });
+
       const startHour = 9;
       const endHour = 21;
       const intervalMinutes = 15;
