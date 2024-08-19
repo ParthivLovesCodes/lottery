@@ -68,7 +68,7 @@ const HomePage = () => {
     <div className="home-page">
       <div className="box-container">
         <div className="top-panel">
-          <h1 className="main-heading">Play India Deluxe Lottery</h1>
+          <h1 className="main-heading">Play India Lottery Deluxe</h1>
           <p className="sub-heading">Daily Result Chart</p>
           <p className="info">
             CONTACT FOR RESULT SMS & CUSTOMER CARE: {phNumber}
