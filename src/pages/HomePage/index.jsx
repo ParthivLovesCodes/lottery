@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { DataContext } from "../../context/DataContext";
 import { toast } from "react-toastify";
 import { useLoading } from "../../context/LoadingContext";
+import { Helmet } from "react-helmet";
 
 const getTodayDate = () => {
   return moment().format("DD-MM-YYYY");
@@ -66,6 +67,17 @@ const HomePage = () => {
   };
   return (
     <div className="home-page">
+      <Helmet>
+        <title>Play India Lottery Deluxe | Best Online Lottery in India</title>
+        <meta
+          name="description"
+          content="Play India Lottery and win big with Play India Lottery Deluxe. The best online lottery platform in India. Join now!"
+        />
+        <meta
+          name="keywords"
+          content="Play India Lottery, Play India Lottery Deluxe, India lottery, online lottery, win big"
+        />
+      </Helmet>
       <div className="box-container">
         <div className="top-panel">
           <h1 className="main-heading">Play India Lottery Deluxe</h1>
