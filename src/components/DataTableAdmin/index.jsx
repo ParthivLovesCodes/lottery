@@ -7,9 +7,9 @@ export const DataTableAdmin = ({ dataArr, date }) => {
     <div className="table">
       <div className="table-header">
         <span className="draw-time">Time</span>
-        <span>Sangam</span>
-        <span>Chetak</span>
         <span>Super</span>
+        <span>Deluxe</span>
+        <span>Sky</span>
         <span>Status</span>
         <span>Action</span>
       </div>

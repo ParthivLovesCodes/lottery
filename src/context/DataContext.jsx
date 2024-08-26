@@ -36,7 +36,7 @@ export const DataProvider = ({ children }) => {
 
       const startHour = 9;
       const endHour = 21;
-      const intervalMinutes = 15;
+      const intervalMinutes = 30;
 
       for (let hour = startHour; hour <= endHour; hour++) {
         for (let minute = 0; minute < 60; minute += intervalMinutes) {

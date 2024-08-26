@@ -12,7 +12,7 @@ const db = getFirestore();
 const timeZone = "Asia/Kolkata";
 
 export const scheduledFunction = functions.pubsub
-  .schedule("1,16,31,46 * * * *")
+  .schedule("1,31 * * * *")
   .timeZone(timeZone)
   .onRun(async (context) => {
     const now = moment().tz(timeZone);
@@ -100,7 +100,7 @@ const createDayDoc = async (dayId) => {
 
     const startHour = 9;
     const endHour = 21;
-    const intervalMinutes = 15;
+    const intervalMinutes = 30;
 
     for (let hour = startHour; hour <= endHour; hour++) {
       for (let minute = 0; minute < 60; minute += intervalMinutes) {

@@ -7,9 +7,9 @@ export const DataTable = ({ results }) => {
     <div className="table">
       <div className="table-header-1">
         <span className="draw-time">DrawTime</span>
-        <span>Sangam</span>
-        <span>Chetak</span>
         <span>Super</span>
+        <span>Deluxe</span>
+        <span>Sky</span>
       </div>
       {results?.map((item) => {
         if (item["declared"])
