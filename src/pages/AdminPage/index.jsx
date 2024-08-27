@@ -17,10 +17,13 @@ const getTodayDate = () => {
 
 const AdminPage = () => {
   const { date: dateId } = useParams();
-  const { getResultsByDate, createDayDoc } = useData();
+  const { getResultsByDate, createDayDoc, getSettingsById } = useData();
   const { showLoading, hideLoading } = useLoading();
 
   const [date, setDate] = useState(dateId ?? getTodayDate());
+  const [ticketName1, setTicketName1] = useState("");
+  const [ticketName2, setTicketName2] = useState("");
+  const [ticketName3, setTicketName3] = useState("");
   const [results, setResults] = useState([]);
   const [newNeeded, setNewNeeded] = useState(false);
 
@@ -28,6 +31,17 @@ const AdminPage = () => {
     const fetchResults = async () => {
       try {
         showLoading();
+        const settingsId = "masterSettings";
+        const result = await getSettingsById(settingsId);
+
+        if (result.success) {
+          setTicketName1(result.data.ticketName1);
+          setTicketName2(result.data.ticketName2);
+          setTicketName3(result.data.ticketName3);
+        } else {
+          toast.error("Something Went Wrong !");
+          console.error(result.error);
+        }
         const data = await getResultsByDate(date);
         if (data?.data) {
           setResults(data?.data);
@@ -132,6 +146,9 @@ const AdminPage = () => {
               <DataTableAdmin
                 dataArr={results}
                 date={date}
+                ticketName1={ticketName1}
+                ticketName2={ticketName2}
+                ticketName3={ticketName3}
               />
             )}
           </div>

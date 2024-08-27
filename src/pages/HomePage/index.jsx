@@ -16,6 +16,9 @@ const getTodayDate = () => {
 
 const HomePage = () => {
   const [phNumber, setPhNumber] = useState("XXXXXXXXXX");
+  const [ticketName1, setTicketName1] = useState("");
+  const [ticketName2, setTicketName2] = useState("");
+  const [ticketName3, setTicketName3] = useState("");
   const [date, setDate] = useState(getTodayDate());
   const { getResultsByDate, getSettingsById } = useContext(DataContext);
   const { showLoading, hideLoading } = useLoading();
@@ -28,6 +31,10 @@ const HomePage = () => {
         const data = await getResultsByDate(date);
         const settings = await getSettingsById("masterSettings");
         setPhNumber(settings?.data?.phoneNumber);
+        setTicketName1(settings.data.ticketName1);
+        setTicketName2(settings.data.ticketName2);
+        setTicketName3(settings.data.ticketName3);
+
         if (data?.data) {
           setResults(data?.data);
         } else if (data?.error === "Not Found!") {
@@ -103,7 +110,12 @@ const HomePage = () => {
             </button>
           </label>
         </div>
-        <DataTable results={results} />
+        <DataTable
+          results={results}
+          ticketName1={ticketName1}
+          ticketName2={ticketName2}
+          ticketName3={ticketName3}
+        />
         <BoxFooter />
       </div>
     </div>
